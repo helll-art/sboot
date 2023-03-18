@@ -20,6 +20,10 @@ public class User {
     private String email;
     private String phone;
     private String address;
+
+    private String userstatus;
 //    @TableField(value = "avatar_url")
 //    private String avatar;
+
+
 }

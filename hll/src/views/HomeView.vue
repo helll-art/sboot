@@ -106,14 +106,19 @@
             <el-button type = "primary" class = "ml-5">导入 <i class = "el-icon-bottom"></i></el-button>
             <el-button type = "primary" >导出 <i class = "el-icon-top"></i></el-button>
           </div>
-          <el-table :data="tableData" border stripe  :head-cell-class-name = "headerBg"  @selection-change="handleSelectionChange" :row-class-name="tableRowClassName">
+          <el-table
+              :data="tableData"
+              style="width: 100%"
+              border
+              :row-class-name="status_change">
+<!--          <el-table :data="tableData"-->
+<!--                    :row-class-name="tableRowClassName(1)">-->
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="username" label="用户名" width="200"></el-table-column>
             <el-table-column prop="nickname" label="昵称" width="200"></el-table-column>
             <el-table-column prop="email" label="邮箱" width="220"></el-table-column>
             <el-table-column prop="phone" label="手机号" width="220"></el-table-column>
             <el-table-column prop="address" label="地址" ></el-table-column>
-
             <el-table-column label = "操作" width = "240">
               <template v-slot="scope">
                 <el-button type = "primary" @click = "handleEdit(scope.row)">编辑<i class = "el-icon-edit"></i></el-button>
@@ -206,13 +211,15 @@ export default {
       this.load()
   },
   methods:{
-    tableRowClassName({row,rowIndex}){
-      if(rowIndex === 1){
-        return 'warning-row';
-      }else if(rowIndex === 3){
-        return 'success-row';
+
+    status_change:function (row) {
+      if(row.row.userstatus == "1"){
+        return "warning-row"
+      }else if(row.row.userstatus == "3"){
+        return "success-row"
+      }else {
+        return "common-row"
       }
-      return '';
     },
     collapse(){
       this.isCollapse = !this.isCollapse
@@ -238,14 +245,19 @@ export default {
     },
     load(){
       request.get("/user/page",{
+
         params: {
           pageNum : this.pageNum,
           pageSize : this.pageSize,
           username : this.username,
-          address : this.address
+          address : this.address,
+
+
         }
       }).then(res =>{
+
         console.log(res)
+        console.log(this.username)
         this.tableData = res.records
       this.total = res.total
       })
@@ -316,14 +328,17 @@ export default {
 .el-aside {
   color: #333;
 }
-.headerBg{
-  background-color : #784b4b !important;
-}
+/*.headerBg{*/
+/*  background-color : #784b4b !important;*/
+/*}*/
 .el-table .warning-row {
   background: oldlace;
 }
 
 .el-table .success-row {
   background: #f0f9eb;
+}
+.el-table .common-row {
+  background: #ffffff;
 }
 </style>
