@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from "../store"
 
 Vue.use(VueRouter)
 
@@ -11,8 +11,9 @@ const routes = [
     component: () => import('../views/Manage.vue'),
     redirect : "/home",
     children: [
-      {path: 'user', name: 'User', component: () => import('../views/User.vue')},
-      {path: 'home', name: 'Home', component: () => import('../views/Home.vue')},
+      {path: 'user', name: '用户管理', component: () => import('../views/User.vue')},
+      {path: 'home', name: '', component: () => import('../views/Home.vue')},
+      {path: 'elder', name: '用户管理/老龄人', component: () => import('../views/Elder.vue')},
     ]
   },
   {
@@ -30,5 +31,9 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to,from,next) => {
+  localStorage.setItem("currentPathName", to.name)
+  store.commit("setPath")
+  next()
+})
 export default router

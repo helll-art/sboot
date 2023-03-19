@@ -2,9 +2,9 @@
 <div style = "line-height: 60px ; display: flex">
   <div style = "flex : 1 ">
     <span :class="collapseBtnClass" style = "cursor:pointer ; font-size : 20px" @click = "collapse"></span>
-    <el-breadcrumb separator = "/" style = "display:  inline-block ; margin-left: 10px; ">
+    <el-breadcrumb separator = "/" style = "display:  inline-block ; margin-left: 10px;">
       <el-breadcrumb-item :to= "{path:'/'}" style = "font-size: 20px">首页</el-breadcrumb-item>
-      <el-breadcrumb-item style = "font-size:  10px ; text-align: center ; ">用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item style = "font-size:  19px">{{ currentPathName }}</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 
@@ -25,6 +25,16 @@ export default {
   props : {
     collapseBtnClass : String,
     collapse: Function
+  },
+  computed: {
+    currentPathName(){
+      return this.$store.state.currentPathName;
+    }
+  },
+  watch : {
+    currentPathName (newVal , oldVal){
+      console.log(newVal)
+    }
   }
 }
 </script>

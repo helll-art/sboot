@@ -28,7 +28,8 @@
         :data="tableData"
         style="width: 100%"
         border
-        :row-class-name="status_change">
+        :row-class-name="status_change"
+        >
       <!--          <el-table :data="tableData"-->
       <!--                    :row-class-name="tableRowClassName(1)">-->
       <el-table-column type="selection" width="55"></el-table-column>
@@ -37,6 +38,13 @@
       <el-table-column prop="email" label="邮箱" width="220"></el-table-column>
       <el-table-column prop="phone" label="手机号" width="220"></el-table-column>
       <el-table-column prop="address" label="地址" ></el-table-column>
+      <el-table-column prop="userstatus" label="职位">
+        <template slot-scope="scope">
+          <span  v-if="scope.row.userstatus === '1'">管理员</span>
+          <span  v-else-if="scope.row.userstatus === '2'">经理</span>
+          <span  v-else-if="scope.row.userstatus === '3'">监管人员</span>
+        </template>
+      </el-table-column>
       <el-table-column label = "操作" width = "240">
         <template v-slot="scope">
           <el-button type = "primary" @click = "handleEdit(scope.row)">编辑<i class = "el-icon-edit"></i></el-button>
