@@ -12,39 +12,53 @@
     <el-submenu index="1">
       <template slot="title"><i class="el-icon-message"></i><span slot = "title">用户管理</span></template>
       <el-menu-item-group>
-        <template></template>
-        <el-menu-item index="/" >监管人员</el-menu-item>
-        <el-menu-item index="1-2">老人家属</el-menu-item>
-        <el-menu-item index="1-3">老龄人</el-menu-item>
-        <el-menu-item index="/user">管理员</el-menu-item>
+        <el-menu-item index="/" ><i class = "el-icon-user-solid"></i>监管人员</el-menu-item>
+        <el-menu-item index="1-2"><i class = "el-icon-user"></i>老人家属</el-menu-item>
+        <el-menu-item index="/user"><i class = "el-icon-s-check"></i>管理员</el-menu-item>
       </el-menu-item-group>
-
-      <el-submenu index="1-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-      </el-submenu>
     </el-submenu>
     <el-submenu index="2">
-      <template slot="title">
-        <i class="el-icon-menu"></i><span slot = "title">导航二</span>
-      </template>
-
+      <template slot="title"><span slot = "title"><i class = "el-icon-suitcase"></i>健康管理</span></template>
+      <el-menu-item-group>
+        <el-menu-item index="/elder"><i class = "el-icon-first-aid-kit"></i>健康档案</el-menu-item>
+        <el-menu-item index="/case"><i class = "el-icon-suitcase-1"></i>病例档案</el-menu-item>
+        <el-menu-item index="/drug"><i class = "el-icon-suitcase-1"></i>药品管理</el-menu-item>
+      </el-menu-item-group>
     </el-submenu>
     <el-submenu index="3">
-      <template slot="title"><i class="el-icon-setting"></i><span slot = "title">导航三</span></template>
+      <template slot="title"><i class = "el-icon-set-up"></i>生活管理</template>
       <el-menu-item-group>
-        <template slot="title">分组一</template>
-        <el-menu-item index="3-1">选项1</el-menu-item>
-        <el-menu-item index="3-2">选项2</el-menu-item>
+        <el-menu-item index="4-1"><i class = "el-icon-fork-spoon"></i>每日餐饮</el-menu-item>
+        <el-menu-item index="4-2"><i class = "el-icon-data-board"></i>外出报备</el-menu-item>
       </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="3-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="3-4">
-        <template slot="title">选项4</template>
-        <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-      </el-submenu>
     </el-submenu>
+    <el-submenu index="4">
+      <template slot="title"><span slot = "title"><i class = "el-icon-pie-chart"></i>入住管理</span></template>
+        <el-menu-item-group>
+          <el-menu-item index="4-1"><i class = "el-icon-link"></i>入住登记</el-menu-item>
+          <el-menu-item index="4-2"><i class = "el-icon-connection"></i>寝室分配</el-menu-item>
+        </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="5">
+      <template slot="title"><span slot = "title"><i class = "el-icon-bangzhu"></i>安全管理</span></template>
+      <el-menu-item-group>
+        <el-menu-item index="4-1"><i class = "el-icon-news"></i>事故记录</el-menu-item>
+        <el-menu-item index="4-2"><i class = "el-icon-news"></i>访客记录</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="6">
+      <template slot="title">
+        <span slot = "title"><i class = "el-icon-guide"></i>收费标准</span></template>
+      <el-menu-item-group>
+
+        <el-menu-item index="4-1"><i class = "el-icon-guide"></i>入住费用</el-menu-item>
+        <el-menu-item index="4-2"><i class = "el-icon-notebook-1"></i>护理费用</el-menu-item>
+      </el-menu-item-group>
+
+    </el-submenu>
+
+
+
   </el-menu>
 </template>
 
