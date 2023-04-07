@@ -10,6 +10,7 @@
     <div style = "padding : 10px 0">
       <el-button type = "primary" @click = "handleAdd">新增 <i class = "el-icon-circle-plus-outline"></i></el-button>
       <el-popconfirm
+
           class = "ml-5"
           confirm-button-text='确定'
           cancel-button-text='取消'
@@ -18,21 +19,26 @@
           title="您确定批量删除吗？"
           @confirm = "delBatch"
       >
-        <el-button slot="reference" type = "danger">批量删除 <i class = "el-icon-remove-outline"></i></el-button>
+        <el-button slot="reference" type = "danger" >批量删除 <i class = "el-icon-remove-outline"></i></el-button>
       </el-popconfirm>
       <!--            <el-button type = "danger" @click ="delBatch" >批量删除 <i class = "el-icon-remove-outline"></i></el-button>-->
-      <el-button type = "primary" class = "ml-5">导入 <i class = "el-icon-bottom"></i></el-button>
-      <el-button type = "primary" >导出 <i class = "el-icon-top"></i></el-button>
+      <el-upload action="http://localhost:9091/user/import" :show-file-list = "false" accept = "xlsx"
+                 :on-success="handleExcelImportSuccess"
+      style = "display: inline-block">
+        <el-button type = "primary" class = "ml-5">导入 <i class = "el-icon-bottom"></i></el-button>
+      </el-upload>
+
+      <el-button type = "primary" @click = "exp" class = "ml-5">导出 <i class = "el-icon-top"></i></el-button>
     </div>
     <el-table
         :data="tableData"
         style="width: 100%"
         border
-
+        @selection-change = "handleSelectionChange"
         >
       <!--          <el-table :data="tableData"-->
       <!--                    :row-class-name="tableRowClassName(1)">-->
-      <el-table-column type="selection" width="55"></el-table-column>
+      <el-table-column type="selection" width="55" v-model="opts" ></el-table-column>
       <el-table-column prop="username" label="用户名" width="200"></el-table-column>
       <el-table-column prop="nickname" label="昵称" width="200"></el-table-column>
       <el-table-column prop="email" label="邮箱" width="220"></el-table-column>
@@ -121,6 +127,7 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 5,
+      opts:[]
     }
   },
   created(){
@@ -155,10 +162,10 @@ export default {
           address : this.address,
         }
       }).then(res =>{
-        console.log(res)
+        console.log(res.data)
         console.log(this.username)
-        this.tableData = res.records
-        this.total = res.total
+        this.tableData = res.data.records
+        this.total = res.data.total
       })
     },
     handleAdd(){
@@ -167,7 +174,7 @@ export default {
     },
     handleDel(id){
       this.request.delete("/user/" + id).then(res => {
-        if(res){
+        if(res.data){
           this.$message.success("删除成功")
           this.load()
         }else{
@@ -176,12 +183,14 @@ export default {
       })
     },
     handleSelectionChange(val){
+      console.log(val)
       this.multipleSelection = val
     },
     delBatch(){
       let ids = this.multipleSelection.map(v => v.id)
       this.request.post("/user/del/batch" ,ids).then(res =>{
-        if(res){
+        console.log(ids);
+        if(res.data){
           this.$message.success("批量删除成功")
           this.load()
         }else{
@@ -195,7 +204,7 @@ export default {
     },
     handleSave(){
       this.request.post("/user",this.form).then(res =>{
-        if(res){
+        if(res.data){
           this.$message.success("保存成功")
           this.dialogFormVisible = false
           this.load()
@@ -208,6 +217,13 @@ export default {
       this.username = ""
       this.address = ""
       this.load()
+    },
+    exp(){
+      window.open("http://localhost:9091/user/export");
+    },
+    handleExcelImportSuccess(){
+      this.$message.success("导入成功");
+      this.load();
     },
   }
 }
@@ -235,3 +251,11 @@ export default {
   background: #ffffff;
 }
 </style>
+<!--
+  created(){
+  this.request.get("/user/username/" + this.user.username).then(res => {
+  if(res.code === '200'){
+    this.form = res.data;
+    }
+
+-->

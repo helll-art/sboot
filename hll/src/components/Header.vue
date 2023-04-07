@@ -8,12 +8,21 @@
     </el-breadcrumb>
   </div>
 
-  <el-dropdown style = "width: 70px ; cursor:pointer">
-    <span>王小虎</span><i class="el-icon-arrow-down"></i>
+  <el-dropdown style = "width: auto ; cursor:pointer ; text-align: right">
+    <div style="display:  inline-block">
+<!--      本地图片<img :src="require('../assets/logo.png')">-->
+      <img :src = "user.avatarUrl" alt = ""
+           style = "width : 30px ; border-radius:  50%;position : relative ; top : 10px ; right : 5px">
+      <span>{{ user.nickname }}</span><i class="el-icon-arrow-down" style = "margin-left: 5px"></i>
+    </div>
+
     <!--            <i class="el-icon-setting" style="margin-right: 15px"></i>-->
     <el-dropdown-menu v-slot="dropdown" style = "width : 100px ; text-align: center ">
       <el-dropdown-item style = "font-size: 14px ; padding : 5px 0">个人信息</el-dropdown-item>
-      <el-dropdown-item style = "font-size: 14px ; padding : 5px 0">退出</el-dropdown-item>
+      <el-dropdown-item style = "font-size: 14px ; padding : 5px 0">
+<!--        <router-link to="/login" style = "text-decoration: none " >退出</router-link>-->
+        <span style = "text-decoration: none" @click = "logout">退出</span>
+      </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </div>
@@ -29,6 +38,21 @@ export default {
   computed: {
     currentPathName(){
       return this.$store.state.currentPathName;
+    }
+  },
+  data(){
+    return  {
+      user : localStorage.getItem("user") ?JSON.parse(localStorage.getItem("user")) : {}
+    }
+  },
+  methods:{
+    collapse(){
+      this.$emit("asideCollapse")
+    },
+    logout(){
+      this.$router.push("/login")
+      localStorage.removeItem("user")
+      this.$message.success("退出成功")
     }
   },
   watch : {

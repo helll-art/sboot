@@ -1,5 +1,6 @@
 package com.ppp.sboot.service;
 
+import com.ppp.sboot.controller.dto.UserDTO;
 import com.ppp.sboot.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
 
+    UserDTO login(UserDTO userDTO);
+
+    User register(UserDTO userDTO);
 }

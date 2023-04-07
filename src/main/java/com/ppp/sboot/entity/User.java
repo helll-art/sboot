@@ -1,8 +1,16 @@
 package com.ppp.sboot.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -16,29 +24,37 @@ import java.time.LocalDateTime;
  * @since 2023-03-18
  */
 @TableName("sys_user")
-
+@Getter
+@Setter
+@ApiModel(value = "User对象" , description = "")
+@ToString
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty("id")
       @TableId(value = "id", type = IdType.AUTO)
       private Integer id;
 
+    @ApiModelProperty("用户名")
     private String username;
 
+    @ApiModelProperty("密码")
     private String password;
-
+    @ApiModelProperty("昵称")
     private String nickname;
-
+    @ApiModelProperty("邮箱")
     private String email;
-
+    @ApiModelProperty("电话")
     private String phone;
-
+    @ApiModelProperty("地址")
     private String address;
-
+    @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
-
+    @ApiModelProperty("用户状态")
     private String userstatus;
+    @TableField(value = "avatarUrl")
+    private String avatarUrl;
 
     
     public Integer getId() {
@@ -113,6 +129,14 @@ public class User implements Serializable {
           this.userstatus = userstatus;
       }
 
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -125,6 +149,7 @@ public class User implements Serializable {
                   ", address=" + address +
                   ", createTime=" + createTime +
                   ", userstatus=" + userstatus +
+                ", avatarUrl=" + avatarUrl +
               "}";
     }
 }

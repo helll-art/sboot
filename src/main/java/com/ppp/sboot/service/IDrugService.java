@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author 何小磊
  * @since 2023-03-20
  */
+
+
 public interface IDrugService extends IService<Drug> {
 
 }
