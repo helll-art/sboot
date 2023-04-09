@@ -12,11 +12,16 @@ const routes = [
     redirect : "/home",
     children: [
       {path: 'user', name: '用户管理', component: () => import('../views/User.vue')},
-      {path: 'home', name: '', component: () => import('../views/Home.vue')},
+      {path: 'home', name: '', component: () => import('../views/Home1.vue')},
       {path: 'elder', name: '用户管理/老龄人', component: () => import('../views/Elder.vue')},
       {path: 'case', name: '用户管理/病例', component: () => import('../views/Case.vue')},
       {path: 'drug', name: '健康管理/药品', component: () => import('../views/Drug.vue')},
     ]
+  },
+  {
+    path : '/Home',
+    name : 'Home',
+    component:() => import ("../views/Home1.vue")
   },
   {
     path: '/about',

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 
 /**
@@ -50,7 +51,7 @@ public class User implements Serializable {
     @ApiModelProperty("地址")
     private String address;
     @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
     @ApiModelProperty("用户状态")
     private String userstatus;
     @TableField(value = "avatarUrl")
@@ -113,11 +114,11 @@ public class User implements Serializable {
           this.address = address;
       }
     
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-      public void setCreateTime(LocalDateTime createTime) {
+      public void setCreateTime(Date createTime) {
           this.createTime = createTime;
       }
     
