@@ -85,6 +85,18 @@
     </div>
     <el-dialog title="用户信息" :visible.sync="dialogFormVisible" width = "30%" >
       <el-form :model="form" label-width="80px" size = "small">
+        <el-form-item label="头像" style = "line-height: 60px">
+        <el-upload
+            :limit = "1"
+            class="avatar-uploader"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :show-file-list="true"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        </el-form-item>
         <el-form-item label="用户名">
           <el-input v-model="form.username" autocomplete="off"></el-input>
         </el-form-item>
@@ -127,13 +139,29 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 5,
-      opts:[]
+      opts:[],
+      imageUrl: ''
     }
   },
   created(){
     this.load()
   },
   methods:{
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
     status_change:function (row) {
       if(row.row.userstatus == "1"){
         return "warning-row"
@@ -230,6 +258,29 @@ export default {
 </script>
 
 <style>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+.avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+}
 .el-header {
   background-color: #FFF;
   color: #333;
@@ -238,9 +289,7 @@ export default {
 .el-aside {
   color: #333;
 }
-/*.headerBg{*/
-/*  background-color : #784b4b !important;*/
-/*}*/
+
 .el-table .warning-row {
   background: oldlace;
 }

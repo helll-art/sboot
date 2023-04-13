@@ -16,6 +16,7 @@ const routes = [
       {path: 'elder', name: '用户管理/老龄人', component: () => import('../views/Elder.vue')},
       {path: 'case', name: '用户管理/病例', component: () => import('../views/Case.vue')},
       {path: 'drug', name: '健康管理/药品', component: () => import('../views/Drug.vue')},
+      {path: 'file', name: '文件管理', component: () => import('../views/File.vue')},
     ]
   },
   {

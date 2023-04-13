@@ -6,7 +6,7 @@
     </el-aside>
 
     <el-container>
-      <el-header style = "border-bottom:1px solid #929494">
+      <el-header style = "border-bottom:1px solid #929494;height:100px ">
         <Header :collapseBtnClass = "collapseBtnClass" :collapse = "collapse"/>
       </el-header>
 

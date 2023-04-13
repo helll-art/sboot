@@ -45,7 +45,7 @@
       <el-table-column prop="edesc" label="用法" width="330">
       </el-table-column>
       <el-table-column prop="taboo" label="禁忌" width="330"></el-table-column>
-      <el-table-column label = "操作" width = "260">
+      <el-table-column label = "操作">
         <template v-slot="scope">
           <el-button type = "primary" @click = "handleEdit(scope.row)">编 辑 <i class = "el-icon-edit"></i></el-button>
 

@@ -1,13 +1,15 @@
 <template>
-  <el-menu :default-openeds="['1', '3']" style = "min-height: 100% ; overflow-x:hidden"
-           background-color = "rgb(48,65,86)" text-color = "#fff"
-           active-text-color = "#ffd04b"
+  <el-menu :default-openeds="['1', '3']" style = "min-height: 100% ; overflow-x:hidden ;max-width: 300px"
+           background-color = "#fff" text-color = "#7f7184"
+           active-text-color = "#7366ff"
            :collapse-trasition = "false"
            :collapse="isCollapse"
+
             router>
-    <div style = "height : 60px;line-height: 60px;text-align: center">
-      <img src = "../assets/logo.png" alt = "" style = "width : 20px ; position : relative ; top : 5px ; margin-right: 5px;">
-      <b style = "color : white" v-show = "logoTextShow">老龄人监管系统</b>
+    <div style = "height : 100px;line-height: 60px;text-align: center">
+      <img src = "../picture/download.png" alt = "" style = "width : 60px ; position : relative ; margin-top: 20px; margin-left :20px">
+      <img src = "../picture/logo.png" alt = "" style = "position : relative ; margin-right : 20px; height : 42px; margin-left: 20px">
+<!--      <b style = "color : white" v-show = "logoTextShow">老龄人监管系统</b>-->
     </div>
     <el-submenu index="1">
       <template slot="title"><i class="el-icon-message"></i><span slot = "title">用户管理</span></template>
@@ -43,7 +45,9 @@
       <template slot="title"><span slot = "title"><i class = "el-icon-bangzhu"></i>安全管理</span></template>
       <el-menu-item-group>
         <el-menu-item index="4-1"><i class = "el-icon-news"></i>事故记录</el-menu-item>
-        <el-menu-item index="4-2"><i class = "el-icon-news"></i>访客记录</el-menu-item>
+        <el-menu-item index="4-1"><i class = "el-icon-office-building"></i>公司管理</el-menu-item>
+        <el-menu-item index="/file"><i class = "el-icon-news"></i>访客记录</el-menu-item>
+        <el-menu-item index="/file"><i class = "el-icon-map-location"></i>老人位置</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="6">
@@ -73,5 +77,7 @@ export default {
 </script>
 
 <style scoped>
-
+  /deep/ .el-aside{
+    weight:300px;
+  }
 </style>

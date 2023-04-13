@@ -70,7 +70,6 @@ public class UserController {
     @PostMapping
     public Result save(@RequestBody User user){
         return Result.success(userService.saveOrUpdate(user));
-
     }
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){

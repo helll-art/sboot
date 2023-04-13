@@ -9,4 +9,5 @@ public class UserDTO {
     private String nickname ;
     private String avatarUrl;
     private String token;
+    private String userstatus;
 }
