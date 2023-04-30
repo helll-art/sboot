@@ -55,7 +55,8 @@ export default {
   name: "Header",
   props : {
     collapseBtnClass : String,
-    collapse: Function
+    collapse: Function,
+    // user : Objecshi
   },
   computed: {
     currentPathName(){

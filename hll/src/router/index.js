@@ -17,6 +17,10 @@ const routes = [
       {path: 'case', name: '用户管理/病例', component: () => import('../views/Case.vue')},
       {path: 'drug', name: '健康管理/药品', component: () => import('../views/Drug.vue')},
       {path: 'file', name: '文件管理', component: () => import('../views/File.vue')},
+      {path: 'company', name: '公司管理', component: () => import('../views/Company.vue')},
+      {path: 'institution', name: '机构信息', component: () => import('../views/Institution.vue')},
+      {path: 'menu', name: '菜单管理', component: () => import('../views/Menu.vue')},
+      {path: 'role', name: '', component: () => import('../views/Role.vue')},
     ]
   },
   {

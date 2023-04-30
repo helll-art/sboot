@@ -82,6 +82,8 @@ public class UserController {
 //        return userService.list();
 //    }
     public Result findAll() {
+
+        System.out.println("/users/findall");
         return Result.success(userService.list());
     }
     @GetMapping("/{id}")

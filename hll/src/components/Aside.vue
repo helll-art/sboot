@@ -17,6 +17,8 @@
         <el-menu-item index="/" ><i class = "el-icon-user-solid"></i>监管人员</el-menu-item>
         <el-menu-item index="1-2"><i class = "el-icon-user"></i>老人家属</el-menu-item>
         <el-menu-item index="/user"><i class = "el-icon-s-check"></i>管理员</el-menu-item>
+        <el-menu-item index="/role"><i class = "el-icon-s-check"></i>角色管理</el-menu-item>
+        <el-menu-item index="/menu"><i class = "el-icon-s-check"></i>菜单管理</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="2">
@@ -37,6 +39,7 @@
     <el-submenu index="4">
       <template slot="title"><span slot = "title"><i class = "el-icon-pie-chart"></i>入住管理</span></template>
         <el-menu-item-group>
+          <el-menu-item index="/institution"><i class = "el-icon-receiving"></i>综合查询</el-menu-item>
           <el-menu-item index="4-1"><i class = "el-icon-link"></i>入住登记</el-menu-item>
           <el-menu-item index="4-2"><i class = "el-icon-connection"></i>寝室分配</el-menu-item>
         </el-menu-item-group>
@@ -45,9 +48,9 @@
       <template slot="title"><span slot = "title"><i class = "el-icon-bangzhu"></i>安全管理</span></template>
       <el-menu-item-group>
         <el-menu-item index="4-1"><i class = "el-icon-news"></i>事故记录</el-menu-item>
-        <el-menu-item index="4-1"><i class = "el-icon-office-building"></i>公司管理</el-menu-item>
+        <el-menu-item index="/company"><i class = "el-icon-office-building"></i>公司管理</el-menu-item>
         <el-menu-item index="/file"><i class = "el-icon-news"></i>访客记录</el-menu-item>
-        <el-menu-item index="/file"><i class = "el-icon-map-location"></i>老人位置</el-menu-item>
+        <el-menu-item ><i class = "el-icon-map-location"></i>老人位置</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="6">

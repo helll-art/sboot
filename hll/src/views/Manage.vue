@@ -7,12 +7,12 @@
 
     <el-container>
       <el-header style = "border-bottom:1px solid #929494;height:100px ">
-        <Header :collapseBtnClass = "collapseBtnClass" :collapse = "collapse"/>
+        <Header :collapseBtnClass = "collapseBtnClass" :collapse = "collapse" :user = "user"/>
       </el-header>
 
       <el-main>
 <!--        表示当前页面的子路由会在router-view 里面展示-->
-        <router-view />
+        <router-view @refreshUser = "getUser"/>
       </el-main>
     </el-container>
   </el-container>
@@ -27,13 +27,17 @@ import Header from "@/components/Header.vue";
 export default {
   components: {Aside
   ,Header},
+  // created() {
+  //   //从后台获取最新的user数据
+  //   this.getUser()
+  // },
   data() {
     return {
       collapseBtnClass:'el-icon-s-fold',
       isCollapse: false,
       sideWidth:200,
       logoTextShow:true,
-
+      user: {}
     }
   },
 
@@ -50,6 +54,14 @@ export default {
         this.logoTextShow = true;
       }
     },
+    // getUser(){
+    //   let username = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username : ""
+    //   //从后台获取User数据
+    //   this.request.get("/user/username/" + username).then(res =>{
+    //     //重新赋值后台的最新User数据
+    //   this.user = res.data
+    //   })
+    // }
   }
 }
 </script>
