@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import {setRouters} from "@/router";
+
 export default {
   name: "Login",
   data() {
@@ -68,9 +70,15 @@ export default {
           this.request.post("/user/Login",this.user).then(res =>{
             //request默认get接口
             if(res.code === '200'){
+              //localStorage.removeItem(menus)
               localStorage.setItem("user",JSON.stringify((res.data)))//存储用户信息到浏览器
-              this.$message.success("登录成功");
+              localStorage.setItem("menus",JSON.stringify((res.data.menus)))//存储用户信息到浏览器
+              localStorage.setItem("ids",JSON.stringify((res.data.ids)))
+              //动态设置当前路由
+              setRouters()
               this.$router.push("/")
+              this.$message.success("登录成功");
+
 
               // this.$router.push("/user/Login")
             }else{

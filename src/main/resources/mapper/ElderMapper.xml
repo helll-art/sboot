@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ppp.sboot.mapper.ElderMapper">
-
+    <select id = "findPageByDepId" resultType = "com.ppp.sboot.entity.Elder">
+        select sys_user.nickname as name , sys_user.phone as phone ,elder.* from sys_user , elder where elder.userId = sys_user.id and userId in
+                (select elderId from dep_eld where dependentId = #{depId})
+    </select>
 </mapper>

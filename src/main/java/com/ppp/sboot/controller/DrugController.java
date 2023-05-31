@@ -2,6 +2,8 @@ package com.ppp.sboot.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ppp.sboot.common.Result;
+import com.ppp.sboot.entity.Elder;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -43,6 +45,15 @@ public class DrugController {
     @GetMapping("/{id}")
     public Drug findOne(@PathVariable Integer id){
         return drugService.getById(id);
+    }
+    @PostMapping("/shop/{userId}/{drugId}")
+    public Result shopByUserId(@PathVariable String userId, @PathVariable String drugId){
+        System.out.println("=================================elder/page/==================================");
+        System.out.println(userId);
+        System.out.println("=================================elder/page/==================================");
+        boolean res1 = drugService.shopByUserId(userId,drugId);
+        System.out.println(res1);
+        return Result.success();
     }
     @GetMapping("/page")
     public Page<Drug> findPage(@RequestParam Integer pageNum ,

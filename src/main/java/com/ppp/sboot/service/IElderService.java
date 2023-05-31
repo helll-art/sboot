@@ -1,7 +1,10 @@
 package com.ppp.sboot.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ppp.sboot.entity.Elder;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IElderService extends IService<Elder> {
 
+    Page<Elder> findPageByDepId(Page<Elder> page, String depId);
 }

@@ -35,18 +35,21 @@
       <!--          <el-table :data="tableData"-->
       <!--                    :row-class-name="tableRowClassName(1)">-->
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="name" label="药品名称" width="120"></el-table-column>
-      <el-table-column prop="price" label="价格(元)" width="70">
+      <el-table-column prop="name" label="药品名称" width="100"></el-table-column>
+      <el-table-column prop="price" label="价格(元)" width="50">
       </el-table-column>
       <el-table-column prop="dosage" label="用量" width="220"></el-table-column>
       <el-table-column prop="beginDate" label="生产日期" width="110"  :formatter="formatDate"></el-table-column>
       <el-table-column prop="endDate" label="有效期" width="110" :formatter="formatDate"></el-table-column>
       <el-table-column prop="inventory" label="库存" width="70"></el-table-column>
-      <el-table-column prop="edesc" label="用法" width="330">
+      <el-table-column prop="edesc" label="用法">
       </el-table-column>
-      <el-table-column prop="taboo" label="禁忌" width="330"></el-table-column>
+      <el-table-column prop="taboo" label="禁忌" ></el-table-column>
+
       <el-table-column label = "操作">
         <template v-slot="scope">
+          <el-button type = "primary" @click = "handleShop(scope.row.id)">购 买 <i class = "el-icon-plus"></i></el-button>
+
           <el-button type = "primary" @click = "handleEdit(scope.row)">编 辑 <i class = "el-icon-edit"></i></el-button>
 
 
@@ -137,6 +140,7 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 5,
+      userId : localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).id: ""
     }
   },
   created(){
@@ -220,6 +224,11 @@ export default {
         }else{
           this.$message.error("删除失败")
         }
+      })
+    },
+    handleShop(row){
+      this.request.post("/drug/shop/" + this.userId+ "/" + row).then(res =>{
+        this.load()
       })
     },
     handleEdit(row){

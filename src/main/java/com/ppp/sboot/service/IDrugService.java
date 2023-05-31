@@ -15,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface IDrugService extends IService<Drug> {
 
+    boolean shopByUserId(String userId,String drugId);
 }

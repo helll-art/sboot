@@ -126,7 +126,7 @@
 
 <script>
 export default {
-  name: "User",
+  name: "Case",
   data(){
     return {
       headerBg: 'headerBg',
@@ -148,6 +148,7 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 5,
+      id : localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).id: ""
     }
   },
   created(){
@@ -187,22 +188,16 @@ export default {
       this.load()
     },
     load(){
-      this.request.get("/elder/page",{
+      this.request.get("/elder/page/" + this.id,{
         params: {
-          // pageNum : this.pageNum,
-          // pageSize : this.pageSize,
-          // name : this.name,
-          // address : this.address,
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          status : this.status,
-          name: this.name,
         }
-      }).then(res =>{
+      }).then ( res => {
         console.log(res)
-        console.log(this.name)
-        this.tableData = res.records
-        this.total = res.total
+        console.log(this.username)
+        this.tableData = res.data.records
+        this.total = res.data.total
       })
     },
     handleAdd(){

@@ -70,7 +70,12 @@
             <el-button slot="reference" type = "danger">删 除 <i class = "el-icon-remove-outline"></i></el-button>
 
           </el-popconfirm>
-          <el-button type = "warning" class = "ml-5" >呼 叫 <i class = "el-icon-phone"></i></el-button>
+          <template>
+            <el-button type = "warning" class = "ml-5" @click="open" >查看 <i class = "el-icon-phone"></i></el-button>
+          </template>
+
+
+<!--          <el-button type = "warning" class = "ml-5" @click = "handleVideo(scope.row)">呼 叫 <i class = "el-icon-phone"></i></el-button>-->
         </template>
       </el-table-column>
     </el-table>
@@ -117,12 +122,18 @@
         <el-button type="primary" @click="handleSave">确 定</el-button>
       </div>
     </el-dialog>
+
   </div>
 </template>
 
 <script>
+
+
+
+
 export default {
-  name: "User",
+
+  name: "Elder",
   data(){
     return {
       headerBg: 'headerBg',
@@ -135,7 +146,6 @@ export default {
             value: '2',
             label: '较差'
       }],
-
       name: "",
       address: "",
       dialogFormVisible: false,
@@ -144,12 +154,20 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 5,
+      id : localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).id: ""
     }
   },
   created(){
     this.load()
   },
   methods:{
+
+    open(){
+      this.$alert('<video controls autoplay style = "height: 270px ; width: 480px" src="http://localhost:9091/video/start"/">', '老人视频', {
+        dangerouslyUseHTMLString: true,
+      });
+
+    },
     formatDate(row, column) {
       // 获取单元格数据
       let data = row[column.property]
@@ -183,22 +201,31 @@ export default {
       this.load()
     },
     load(){
-      this.request.get("/elder/page",{
+      console.log("=================================user.id=================================")
+      console.log(this.id)
+      console.log("=================================user.id=================================")
+      // this.request.get("/elder/page",{
+      //   params: {
+      //     name : this.user.id,
+      //     pageNum: this.pageNum,
+      //     pageSize: this.pageSize,
+      //   }
+      // }).then(res =>{
+      //   console.log(res)
+      //   console.log(this.name)
+      //   this.tableData = res.data.records
+      //   this.total = res.data.total
+      // })
+      this.request.get("/elder/page/" + this.id,{
         params: {
-          // pageNum : this.pageNum,
-          // pageSize : this.pageSize,
-          // name : this.name,
-          // address : this.address,
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          status : this.status,
-          name: this.name,
         }
-      }).then(res =>{
+      }).then ( res => {
         console.log(res)
-        console.log(this.name)
-        this.tableData = res.records
-        this.total = res.total
+        console.log(this.username)
+        this.tableData = res.data.records
+        this.total = res.data.total
       })
     },
     handleAdd(){

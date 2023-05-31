@@ -25,7 +25,7 @@ public class CodeGenerator {
                 .strategyConfig(builder -> {
                     builder.entityBuilder().enableLombok();
                     builder.controllerBuilder().enableHyphenStyle().enableRestStyle();
-                    builder.addInclude("menu") // 设置需要生成的表名
+                    builder.addInclude("healthy") // 设置需要生成的表名
                             .addTablePrefix("t_", "sys_"); // 设置过滤表前缀
                 })
 

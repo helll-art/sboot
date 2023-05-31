@@ -37,10 +37,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
-
-
-
     @Resource
     private IUserService userService;
 
@@ -89,13 +85,13 @@ public class UserController {
     @GetMapping("/{id}")
     public Result findOne(@PathVariable Integer id){
         return Result.success(userService.getById(id));
-
     }
     @GetMapping("/page")
     public Result findPage(@RequestParam Integer pageNum ,
                                @RequestParam Integer pageSize,
                                @RequestParam(defaultValue = "") String username,
-                               @RequestParam(defaultValue = "") String address){
+                               @RequestParam(defaultValue = "") String address,
+                           @RequestParam(defaultValue = "") String userstatus){
         IPage<User> page = new Page<>(pageNum,pageSize);
         QueryWrapper<User>   queryWrapper = new QueryWrapper<>();
         if(!"".equals(username)){
@@ -104,7 +100,9 @@ public class UserController {
         if(!"".equals(address)){
             queryWrapper.like("address",address);
         }
-
+        if(!"".equals(userstatus)){
+            queryWrapper.like("userstatus",userstatus);
+        }
         //queryWrapper.or().like("address",address);
 
         //获取当前用户信息

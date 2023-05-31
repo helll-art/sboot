@@ -57,7 +57,6 @@ public class User implements Serializable {
     @TableField(value = "avatarUrl")
     private String avatarUrl;
 
-    
     public Integer getId() {
         return id;
     }

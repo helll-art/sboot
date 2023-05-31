@@ -28,11 +28,15 @@
               <span style="font-size: 18px ;display: flow ;margin-top:10px">{{ user.nickname }}</span>
 <!--              <div style = "height : 20px"></div>-->
                 <small  v-if="user.userstatus === '1'">管理员</small>
-                <small  v-else-if="user.userstatus === '2'">经理</small>
+                <small  v-else-if="user.userstatus === '2'">老人</small>
                 <small  v-else-if="user.userstatus === '3'">监管人员</small>
+              <small  v-else-if="user.userstatus === '4'">老人家属</small>
             </div>
+
+<!--            user.avatarUrl-->
             <img :src = "user.avatarUrl" alt = ""
-                 style = "width : 60px ; border-radius:  50%; position : relative ; top : -2px ; right : 5px ; margin-top: 20px">
+                 style = "width : 60px ; border-radius:  50%; height : 60px;position : relative ; top : -2px ; right : 5px ; margin-top: 20px">
+
           </a>
           </div>
         </div>
@@ -42,11 +46,33 @@
     <el-dropdown-menu v-slot="dropdown" style = "width : 100px ; text-align: center ">
       <el-dropdown-item style = "font-size: 14px ; padding : 5px 0">个人信息</el-dropdown-item>
       <el-dropdown-item style = "font-size: 14px ; padding : 5px 0">
+        <el-badge :value="1" class="item">
 <!--        <router-link to="/login" style = "text-decoration: none " >退出</router-link>-->
+        <span style = "text-decoration: none" @click = "centerDialogVisible = true">新消息</span>
+        </el-badge>
+      </el-dropdown-item>
+      <el-dropdown-item style = "font-size: 14px ; padding : 5px 0">
+        <!--        <router-link to="/login" style = "text-decoration: none " >退出</router-link>-->
         <span style = "text-decoration: none" @click = "logout">退出</span>
       </el-dropdown-item>
     </el-dropdown-menu>
+
   </el-dropdown>
+    <el-dialog
+        title="健康建议"
+        :visible.sync="centerDialogVisible"
+        width="30%"
+        center>
+      <span>
+        <h2  style = "border-bottom: 50px"><el-button type="success" icon="el-icon-suitcase-1" circle size = "mini"></el-button>  {{this.tips[0]}}</h2>
+        <h2><el-button type="primary" icon="el-icon-fork-spoon" circle size = "mini"></el-button>  {{this.tips[1]}}</h2>
+        <h2><el-button type="warning" icon="el-icon-baseball" circle size = "mini"></el-button>  {{this.tips[2]}}</h2>
+      </span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
 </div>
 </template>
 
@@ -56,7 +82,6 @@ export default {
   props : {
     collapseBtnClass : String,
     collapse: Function,
-    // user : Objecshi
   },
   computed: {
     currentPathName(){
@@ -65,7 +90,10 @@ export default {
   },
   data(){
     return  {
-      user : localStorage.getItem("user") ?JSON.parse(localStorage.getItem("user")) : {}
+      user : localStorage.getItem("user") ?JSON.parse(localStorage.getItem("user")) : {},
+      tips : localStorage.getItem("user") ?JSON.parse(localStorage.getItem("user")).tips : {},
+      centerDialogVisible: false
+
     }
   },
   methods:{
@@ -73,19 +101,18 @@ export default {
       this.$emit("asideCollapse")
     },
     logout(){
-      this.$router.push("/login")
-      localStorage.removeItem("user")
+      this.$store.commit("logout")
       this.$message.success("退出成功")
     }
   },
   watch : {
     currentPathName (newVal , oldVal){
       console.log(newVal)
+
     }
   }
 }
 </script>
-
 <style scoped>
   .my-account-wrapper{
     height:99px;

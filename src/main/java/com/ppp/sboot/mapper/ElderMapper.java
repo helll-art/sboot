@@ -1,5 +1,6 @@
 package com.ppp.sboot.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ppp.sboot.entity.Elder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ElderMapper extends BaseMapper<Elder> {
 
+    Page<Elder> findPageByDepId(Page<Elder> page, String depId);
 }

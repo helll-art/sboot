@@ -4,6 +4,19 @@
     <div style = "padding:10px 0">
       <el-input style = "width : 200px" placeholder = "请输入用户名" suffix-icon = "el-icon-user" v-model = "username"></el-input>
       <el-input style = "width : 200px" placeholder = "请输入地址" suffix-icon = "el-icon-office-building" v-model = "address"></el-input>
+<!--      //新添加-->
+      <template>
+        <el-select v-model="value" placeholder="请选择角色">
+          <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+          </el-option>
+        </el-select>
+      </template>
+
+<!--      新添加-->
       <el-button class = "ml-5" type = "primary" @click = "load">搜索</el-button>
       <el-button type="success" @click = "reset">重置</el-button>
     </div>
@@ -44,11 +57,12 @@
       <el-table-column prop="email" label="邮箱" width="220"></el-table-column>
       <el-table-column prop="phone" label="手机号" width="220"></el-table-column>
       <el-table-column prop="address" label="地址" ></el-table-column>
-      <el-table-column prop="userstatus" label="职位">
+      <el-table-column prop="userstatus" label="角色">
         <template slot-scope="scope">
           <span  v-if="scope.row.userstatus === '1'">管理员</span>
-          <span  v-else-if="scope.row.userstatus === '2'">经理</span>
+          <span  v-else-if="scope.row.userstatus === '2'">老人</span>
           <span  v-else-if="scope.row.userstatus === '3'">监管人员</span>
+          <span  v-else-if="scope.row.userstatus === '4'">老人家属</span>
         </template>
       </el-table-column>
       <el-table-column label = "操作" width = "240">
@@ -100,6 +114,11 @@
         <el-form-item label="用户名">
           <el-input v-model="form.username" autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item label = "角色">
+          <el-select clearable v-model = "form.userstatus" placeholder="请选择角色" style = "width : 100%">
+            <el-option v-for = "item in roles" :key = "item.name" :label = "item.description" :value = "item.flag"></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="昵称">
           <el-input v-model="form.nickname" autocomplete="off"></el-input>
         </el-form-item>
@@ -129,6 +148,21 @@ export default {
   name: "User",
   data(){
     return {
+      options: [{
+        value: '1',
+        label: '管理员'
+      }, {
+        value: '2',
+        label: '老人'
+      }, {
+        value: '3',
+        label: '监管人员'
+      },{
+        value : '4',
+        label: '老人家属'
+      }
+      ],
+      value: '',
       headerBg: 'headerBg',
       tableData: [],
       username: "",
@@ -140,7 +174,8 @@ export default {
       pageNum: 1,
       pageSize: 5,
       opts:[],
-      imageUrl: ''
+      imageUrl: '',
+      roles : []
     }
   },
   created(){
@@ -188,12 +223,17 @@ export default {
           pageSize : this.pageSize,
           username : this.username,
           address : this.address,
+          userstatus : this.value
         }
       }).then(res =>{
         console.log(res.data)
         console.log(this.username)
         this.tableData = res.data.records
         this.total = res.data.total
+      })
+
+      this.request.get("/role").then(res => {
+        this.roles = res.data
       })
     },
     handleAdd(){
@@ -244,6 +284,7 @@ export default {
     reset(){
       this.username = ""
       this.address = ""
+      this.value = ""
       this.load()
     },
     exp(){

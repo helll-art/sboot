@@ -2,6 +2,8 @@ package com.ppp.sboot.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +54,7 @@ import lombok.Setter;
     private String disease;
 
     private String request;
+
 
   public Integer getId() {
     return id;

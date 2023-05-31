@@ -2,7 +2,7 @@
 
   <el-container style = "min-height: 100vh">
     <el-aside width="sideWidth + 'px'" style="background-color: rgb(238, 241, 246); box-shadow: 2px 0 6px rgb(0 21 41 / 35%)">
-      <Aside  :isCollapse = "isCollapse" :logoTextShow = "logoTextShow"/>
+      <Aside  :isCollapse = "isCollapse" :logoTextShow = "logoTextShow" />
     </el-aside>
 
     <el-container>
@@ -54,14 +54,14 @@ export default {
         this.logoTextShow = true;
       }
     },
-    // getUser(){
-    //   let username = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username : ""
-    //   //从后台获取User数据
-    //   this.request.get("/user/username/" + username).then(res =>{
-    //     //重新赋值后台的最新User数据
-    //   this.user = res.data
-    //   })
-    // }
+    getUser(){
+      let username = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username : ""
+      //从后台获取User数据
+      this.request.get("/user/username/" + username).then(res =>{
+        //重新赋值后台的最新User数据
+      this.user = res.data
+      })
+    }
   }
 }
 </script>

@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface DrugMapper extends BaseMapper<Drug> {
 
+    boolean shopByUserId(String userId);
+
+    boolean changeSynHealthy(String userId);
+
+    boolean changeInventory(String drugId);
+
+    boolean changeCost(String userId,String drugId);
 }

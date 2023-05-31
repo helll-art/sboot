@@ -19,8 +19,10 @@ import java.util.List;
 public class SbootApplication {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+
         SpringApplication.run(SbootApplication.class, args);
+
     }
 //    @Override
 //    protected void addResourceHandlers(ResourceHandlerRegistry registry) {

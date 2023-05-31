@@ -7,4 +7,8 @@ public interface Constants {
     String Code_400 = "400"; //参数错误
     String Code_600 = "600"; //其他业务异常
 
+    String ROLE_ADMIN = "ROLE_ADMIN";
+    String ROLE_USER = "ROLE_USER";
+
+
 }
